@@ -4,7 +4,8 @@ let moduleError;
 
 try {
   const db = require('../models');
-  ({ Recipe, Instruction, Ingredient, MeasurementUnit } = db);
+  ({ recipe: Recipe , Instruction, Ingredient, MeasurementUnit } = db);
+  //console.log('database',db)
   if (Recipe === undefined) {
     moduleError = 'It looks like you need to generate the Recipe model.';
   }
@@ -21,6 +22,7 @@ try {
 
 
 async function getTenNewestRecipes() {
+  console.log('How are you')
   // Use the findAll method of the Recipe object to return the recipes.
   // Use the options for findAll to **limit** the number of objects and order it
   //   appropriately. (That's a hint. Look through that documentation for that
@@ -34,7 +36,21 @@ async function getTenNewestRecipes() {
   // });
   //
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll
+  try{
+  }catch(e) {
+    console.log(e)
+  }
+  console.log('Youre welcome:', Recipe)
+  const recipe =  await Recipe.findAll({
+
+    limit: 10,
+    //order: ['createdAt', 'DESC']
+  });
+  console.log('Hi:',recipe);
+  return recipe;
 }
+// console.log('Bye',getTenNewestRecipes());
+
 
 async function getRecipeById(id) {
   // Use the findByPk method of the Recipe object to return the recipe. Use
@@ -71,6 +87,15 @@ async function getRecipeById(id) {
   // Here are links to the wholly-inadequate docs for this.
   // Docs: https://sequelize.org/v5/manual/models-usage.html#eager-loading
   //       https://sequelize.org/v5/manual/models-usage.html#nested-eager-loading
+  // Model.findByPk(id, {
+  //     include: [
+  //       firstDataModel,
+  //       {
+  //         model: secondDataModel,
+  //         include: [thirdDataModel]
+  //       }
+  //     ]
+  //   });
 }
 
 async function deleteRecipe(id) {

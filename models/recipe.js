@@ -1,12 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const recipe = sequelize.define('recipe', {
-    specification: DataTypes.TEXT,
-    listOrder: DataTypes.INTEGER,
-    recipeId: DataTypes.INTEGER
+  const Recipe = sequelize.define('recipe', {
+    title: DataTypes.STRING(200)
   }, {});
-  recipe.associate = function(models) {
-    Recipe.hasMany(models.instruction, { foreignKey: 'recipeId'});
+  Recipe.associate = function(models) {
+    Recipe.hasMany(models.instructions, { foreignKey: 'recipeId', onDelete: 'CASCADE', hooks: true});
   };
-  return recipe;
+  return Recipe;
 };

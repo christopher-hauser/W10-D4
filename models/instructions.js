@@ -6,25 +6,25 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       validate: {
         notEmpty: true,
-        notNull: true
+        allowNull: false
       }
     },
     listOrder: {
       type: DataTypes.INTEGER,
       validate: {
-        notNull: true,
+        allowNull: false,
         [Op.gt]: 0
       }
     },
     recipeId: {
       type: DataTypes.INTEGER,
       validate: {
-        notNull: true
+        allowNull: false
       }
     }
   }, {});
   instructions.associate = function(models) {
-    instructions.belongsTo(models.Recipe, { foreignKey: 'recipeId'});
+    instructions.belongsTo(models.recipe, { foreignKey: 'recipeId'});
   };
   return instructions;
 };
