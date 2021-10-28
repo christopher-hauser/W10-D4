@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     recipeId: DataTypes.INTEGER
   }, {});
   recipe.associate = function(models) {
-    // associations can be defined here
+    Recipe.hasMany(models.instruction, { foreignKey: 'recipeId'});
   };
   return recipe;
 };
